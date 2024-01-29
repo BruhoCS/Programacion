@@ -1,0 +1,51 @@
+package ejercicio2pag228;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+import java.util.stream.IntStream;
+
+public class Ejercicio2Pag228 {
+
+    public static void main(String[] args) {
+        ArrayList<Integer>str = new ArrayList<>();
+        int suma = 0;
+        int max = 0;
+        int min = 101;
+        int media = 0;
+        
+        Random generador = new Random();
+        
+        int limite = generador.nextInt(10, 21);
+       
+        
+        do{
+            
+            str.add(Integer.valueOf(generador.nextInt(0,101)));
+            limite--;
+            
+        }while(limite > 0);
+        
+        //Poner en orden los numero que salen por pantalla
+        Collections.sort(str);
+        
+        //sacar numeros
+        for (Integer numero: str ) {
+            //Muestra los numeros que se han insertado
+            System.out.println("Numero: "+numero);
+            suma += numero;
+            if(numero > max  ){
+                max = numero;
+            }
+            if(numero < min){
+                min = numero;
+            }
+        }
+        
+        System.out.println("Maximo: "+max);
+        System.out.println("Minimo: "+min);
+        System.out.println("Suma: "+suma);
+        System.out.println("Media: "+suma / str.size());
+    }
+    
+}
