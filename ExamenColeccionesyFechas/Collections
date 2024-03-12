@@ -1,0 +1,91 @@
+-----------------------------------ArrayList----------------------------------------------------------------------------------------------------------
+//Arraylist de gato
+		ArrayList<Gato> g = new ArrayList<>();
+
+//Añadir gatos
+		g.add(new Gato("Chema", 3, "Patroquio"));
+		g.add(new Gato("Elver", 4, "Galarga"));
+		g.add(new Gato("Cayo", 2, "Mario"));
+
+//Crear comparator(uso de sort para ordenar)
+		Collections.sort(g, new Comparator<Gato>() {
+
+			@Override
+			public int compare(Gato o1, Gato o2) {
+				//Convertir int(tipo primitivo) a Integer
+				return Integer.valueOf(o1.getEdad()).compareTo(o2.getEdad());
+				
+			}
+		});
+
+//Iterator Gatos
+		Iterator<Gato> iterator = g.iterator();
+
+		while (iterator.hasNext()) {
+			System.out.println(iterator.next());
+		}
+
+-----------------------------ArrayList Integer---------------------------------------------------------------------------------------------------------------
+//ArraList de integer 2ºprueba
+		ArrayList<Integer> numeros = new ArrayList<Integer>();
+
+//Añadir numeros 2ºprueba
+		numeros.add(14);
+		numeros.add(6);
+		numeros.add(12);
+		numeros.add(13);
+		numeros.add(15);
+		numeros.add(16);
+		numeros.add(17);
+		numeros.add(18);
+		numeros.add(19);
+		numeros.add(20);
+
+//Comparator Integer
+		Collections.sort(numeros , new Comparator<Integer>() {
+
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				
+				return o1 - o2;
+			}
+			
+			
+		});
+
+//Iterator Integer
+		Iterator<Integer> it = numeros.iterator();
+		
+		while(it.hasNext()) {
+			System.out.println(it.next());
+		}
+
+----------------------------------------------------------HashMap----------------------------------------------------------------------------------------------
+//HashMap 3ºprueba
+		HashMap<Integer, String> has = new HashMap<Integer, String>();
+
+	//Añadir datos a hasmap
+		has.put(15, "Chema");
+		has.put(19, "Cabo");
+		has.put(33, "Poreiro");
+//Imprimir el hashmap
+		System.out.println(has);
+		
+		//Obtener un dato concreto del hashmap
+		System.out.println(has.get(19));
+		
+		//Borrar un valor del hashmap
+		has.remove(33);
+		
+		//Comprobar si contiene algún tipo de valor
+		if(has.containsKey(19)) {
+			System.out.println("Si contiene un valor de 19 y es: "+has.get(19));
+		}else{
+			System.out.println("No contiene este valor");
+		};
+		
+		//Iterar el hashMap
+		for(Integer indice : has.keySet()) {
+			System.out.print("\n"+has.get(indice)+"\n");
+		}
+
