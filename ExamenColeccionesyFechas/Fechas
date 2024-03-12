@@ -1,0 +1,76 @@
+public class Fechas {
+	public static void main(String[] args) {
+	//Presnta la fecha actual
+		
+		System.out.println(LocalDate.now());
+		
+	//Presenta fecha y hora actual
+	
+		System.out.println(LocalDateTime.now());
+		
+	//Presenta la fecha y la hora en Europa/París
+		System.out.println(ZonedDateTime.of(LocalDateTime.now(), ZoneId.of("Europe/Paris")));
+	
+	//Presentar fecha del 10/12/2022 con este formato
+		LocalDate l1 =LocalDate.of(2022, 12, 10);
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		
+		System.out.println(l1.format(formato));
+
+	//Indicar a que mes corresponde el 7/12/2020, en numero y el nombre
+		LocalDate f1 = LocalDate.of(2020, 12, 7);
+		System.out.println("El nombre del mes: " + f1.getMonth()+" Numero: " 
+				            + f1.getMonthValue());
+		
+	//Comprobar si el año 2022 es bisiesto
+		//System.out.println("Año 2022 es bisiesto: "+ LocalDate.of(2022, 2, 29));
+		//No lo es por que da error ya que no existio el 29 de febreo de 2022
+		
+	
+	// Comprobar si puedo poner el dia 29 a 2/2020
+		System.out.println("Año 2022 es bisiesto: "+ LocalDate.of(2020, 2, 29));
+		
+	//Ver que fecha es 30 dias después deñ 20/2/2010
+		LocalDate f2 = LocalDate.of(2010, 2, 20);
+		System.out.println("30 dias despues será: "+ f2.plusDays(30));
+		
+	//Ver que fecha es 1 mes despues del 15/12/2009
+		LocalDate f3 = LocalDate.of(2009, 12, 15);
+		System.out.println("Dentro de un mes será: "+f3.plusMonths(1));
+	
+	//Calcular cuantos dias han pasado entre 7/10/2001 y el 10/5/2004
+		LocalDate f4 = LocalDate.of(2001, 10, 7);
+		LocalDate f4b = LocalDate.of(2004, 5, 10);
+		System.out.println("Los dias que pasaron son: "+ChronoUnit.DAYS.between(f4, f4b) );
+		
+		//Calcular cuantos meses han pasado entre 7/10/2001 y el 10/5/2004
+				System.out.println("Los meses que pasaron son: "+ChronoUnit.MONTHS.between(f4, f4b) );
+		// Calcular cuantos años han pasado entre 7/10/2001 y el 10/5/2004
+				System.out.println("Los años que pasaron son: "+ChronoUnit.YEARS.between(f4, f4b) );
+	
+	//Calcular cuantas horas han pasado entre 7/10/2001 y el 10/5/2004
+		LocalDateTime f4c = LocalDateTime.of(2001, 10, 7 , 00 , 00);
+		LocalDateTime f4d = LocalDateTime.of(2004, 5, 10, 00 , 00);
+		System.out.println("Las horas que pasaron son: "+ChronoUnit.HOURS.between(f4c, f4d) );	
+		
+	//Calcular el periodo que existe entre 3/2/2020 y el 5/7/2021
+		LocalDate f5 = LocalDate.of(2020, 2, 3);
+		LocalDate f5b = LocalDate.of(2021, 7, 5);
+		Period periodof5 = f5.until(f5b);
+		System.out.println("El periodo que paso fué de: "+periodof5);
+		
+	//Ver que fecha sale si sumamos el periodo anterior a la fecha 12/11/2022
+		LocalDate f6 = LocalDate.of(2022, 11, 12);
+		System.out.println("La suma daria: "+f6.plus(periodof5));
+		
+	//Ver que dia de la semana era el 22/4/2022
+		LocalDate f7 = LocalDate.of(2022, 4, 22);
+		System.out.println("El dia era: "+f7.getDayOfWeek());
+		
+	//Ver que dia de la semana era hace tres dias
+		System.out.println("Hace 3 dias era: "+LocalDate.now().minusDays(3));
+		
+	//Indicar el nombre en castellano del mes actual
+		
+	}
+}
