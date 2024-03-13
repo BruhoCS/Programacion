@@ -1,0 +1,65 @@
+package Ejercicio3Pag17Colecciones;
+
+import java.sql.Time;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
+
+public class VOO {
+ private String numeroVoo;
+ private String Nom_compañia;
+ private String destino;
+ private LocalDateTime hora;
+ 
+ public VOO(String numeroVoo , String Nom_compañia ,String destino, LocalDateTime hora) {
+	 this.destino = destino;
+	 this.Nom_compañia = Nom_compañia;
+	 this.numeroVoo = numeroVoo;
+	 this.hora = hora;
+ }
+ 
+ public String getDestino() {
+	return destino;
+}
+ public LocalDateTime getHora() {
+	return hora;
+}
+ public String getNom_compañia() {
+	return Nom_compañia;
+}
+ public String getNumeroVoo() {
+	return numeroVoo;
+}
+
+protected void setNumeroVoo(String numeroVoo) {
+	this.numeroVoo = numeroVoo;
+}
+
+protected void setNom_compañia(String nom_compañia) {
+	Nom_compañia = nom_compañia;
+}
+
+protected void setDestino(String destino) {
+	this.destino = destino;
+}
+
+protected void setHora(LocalDateTime hora) {
+	this.hora = hora;
+}
+ 
+@Override
+	public String toString() {
+		return "== DATOS VOO ==" + "\n" + "   Numero de voo: " + numeroVoo + "\n" + "   Compañia: "
+				+ Nom_compañia + "\n" + "   Destino: " + destino+"\n"+"Duracion"+
+				CompararSec(hora,LocalDateTime.now());
+	}
+
+public long CompararSec(LocalDateTime fechainc , LocalDateTime fechaFin) {
+	
+	long secComp = ChronoUnit.SECONDS.between(fechainc, fechaFin);
+	
+	return secComp;
+}
+}
