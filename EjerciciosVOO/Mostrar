@@ -1,0 +1,110 @@
+package Ejercicio3Pag17Colecciones;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayDeque;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+import java.time.Period;
+public class Mostrar {
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+
+		// Varibles
+			// scan menu
+			int opcion;
+
+			// opcion 1
+			String nVoo;
+			String compañia;
+			String destino;
+			
+			// opción 2
+			String despegar;
+
+		// Cola
+		ArrayDeque<VOO> vuelos = new ArrayDeque<>();
+//		VOO v1 = new VOO("12","comapñia1","Madrid",LocalTime.now());
+//		vuelos.add(v1);
+//		VOO v2 = new VOO("13","comapñia2","Santiago",LocalTime.now());
+//		vuelos.add(v2);
+while(true){
+		System.out.println("MENU" + "\n" + "   1.Engadir voo" + "\n" + "   2.Asignar despeque" + "\n" + "   3.Sair"
+				+ "\n" + "Seleccione unha opción :");
+		opcion = scan.nextInt();
+		switch (opcion) {
+		//Engadir voo
+		case 1:
+		{
+			System.out.println("Indicame o numero de Voo:");
+			nVoo = scan.next();
+			System.out.println("Agora indique a compañía");
+			compañia = scan.next();
+			System.out.println("Por ultimo o destino:");
+			destino = scan.next();
+
+			if (ComprobarNvoo(nVoo)) {
+				vuelos.add(new VOO(nVoo, compañia, destino, LocalDateTime.now()));
+				System.out.println("== DATOS VOO ==" + "\n" + "   Numero de voo: " + nVoo + "\n" + "   Compañia: "
+						+ compañia + "\n" + "   Destino: " + destino);
+			}else {
+				System.out.println("Numero incorrecto");
+			}
+			break;
+		}
+		//asignar despegue
+		case 2:
+			 try {
+				 System.out.println(vuelos.getFirst().toString()+"\n"
+						             +"¿Quieres despegarlo?(si/no)");
+				 despegar = scan.next();
+				 
+				 if(despegar.equals("si")) {
+					 System.out.println(vuelos.toString());
+					 vuelos.pop();
+				 }else if(despegar.equals("no")) {
+					 System.out.println("El vuelo sigue en cola");
+				 }else {
+					 System.out.println("No es una orden correcta");
+				 }
+				 
+			 }catch(NoSuchElementException e){
+				 System.out.println("No hay nigún vuelo disponible");
+				 break;
+			 }
+			 break;
+		case 3:
+		{
+			return;
+		}
+		}
+	}
+}
+
+	// Metodo opcion 1 comprobar o numero de voo
+	public static boolean ComprobarNvoo(String nVoo) {
+		if(nVoo.length() == 7) {
+		for (int i = 0; i < 7; i++) {
+			if (Character.isAlphabetic(nVoo.charAt(i)) && i <= 2) {
+
+			} else if(!Character.isAlphabetic(nVoo.charAt(i)) && i <= 2) {
+				System.out.println("Letras incorrectas");
+				return false;
+			}
+			if (Character.isDigit(nVoo.charAt(i)) && i > 2) {
+
+			} else if (!Character.isDigit(nVoo.charAt(i)) && i >2){
+				
+				System.out.println("Numeros incorrectas");
+				return false;
+			}
+		}
+		}else {
+			return false;
+		}
+		return true;
+	}
+	
+}
