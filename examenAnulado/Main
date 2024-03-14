@@ -1,0 +1,35 @@
+package examenanulado;
+
+
+import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.Month;
+
+import java.util.LinkedList;
+
+public class Examenanulado {
+
+    public static void main(String[] args) throws FechaHoraSalidaNoValidaException, ValorNoValidoException {
+        //Scanner
+        Scanner scan = new Scanner(System.in);
+        
+        //Variables
+        int option;
+        //LinkedList
+        LinkedList<Vuelo> vuelos = new LinkedList<>();
+        //Añadir vuelos
+       vuelos.add (new Vuelo("abc1234", "Barcelona", "Milan", LocalDateTime.of(2024, Month.APRIL, 4, 15, 00), LocalDateTime.of(2024, Month.APRIL, 4, 18, 00)));
+   
+       //Llamar a los metodos
+       Control menu = new Control();
+       
+       while(true){
+       menu.menu();
+       option = scan.nextInt();
+       menu.manuOpciones(vuelos, option);
+       
+       }
+    
+    }
+
+}
