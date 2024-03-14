@@ -1,0 +1,149 @@
+package examenanulado;
+
+
+import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.LinkedList;
+
+public class Control {
+    //Scanner
+    Scanner scan = new Scanner(System.in);
+
+    //Variables
+        //Variables caso 2
+        private String codigoU , origenU , destinoU;
+        private LocalDateTime salidaU , llegadaU;
+        //Variable caso 3
+        private String borrar;
+        //Variable caso 4
+        private String siNo;
+        //Variable caso 6
+        private int min = 0;
+    public void menu() {
+        //Menu
+        System.out.println("-------Menú-------" + "\n"
+                + "  1.Mostrar cola de vuelos" + "\n"
+                + "  2.Anadir un nuevo vuelo" + "\n"
+                + "  3.Eliminar un vuelo" + "\n"
+                + "  4.Dar salida a un vuelo" + "\n"
+                + "  5.Actualizar lista de vuelos" + "\n"
+                + "  6.Modificar horairos de un vuelo" + "\n"
+                + "  7.Salir" + "\n"
+                + "Indica la operacion a realizar: ");
+    }
+
+    public void manuOpciones(LinkedList<Vuelo> vuelos , int optionUser) throws FechaHoraSalidaNoValidaException , ValorNoValidoException{
+
+        
+
+            switch (optionUser) {
+                case 1: {
+                    Collections.sort(vuelos, new Comparator<Vuelo>() {
+                        @Override
+                        public int compare(Vuelo o1, Vuelo o2) {
+                            return o1.getCodigo().compareTo(o2.getCodigo());
+                        }
+
+                    });
+
+                    Iterator<Vuelo> iterator = vuelos.iterator();
+
+                    while (iterator.hasNext()) {
+                        System.out.println(iterator.next());
+                    }
+                    break;
+                }
+                case 2: {
+                   
+                      
+                        System.out.println("Indique el codigo del vuelo: ");
+                        codigoU = scan.next();
+                        System.out.println("Indique el origen del vuelo: ");
+                        origenU = scan.next();
+                        System.out.println("Indique el destino del vuelo: ");
+                        destinoU = scan.next();
+                        System.out.println("Indique la salida del vuelo: ");
+                        salidaU = LocalDateTime.parse(scan.next());
+                        if(salidaU.isBefore(LocalDateTime.now())){
+                            throw new FechaHoraSalidaNoValidaException();
+                        }
+                        System.out.println("Indique la llegada del vuelo: ");
+                        llegadaU = LocalDateTime.parse(scan.next());
+                        
+                        vuelos.add(new Vuelo(codigoU , origenU,destinoU,salidaU,llegadaU));
+                    
+                    
+                    break;
+                }
+                case 3: {
+                    //Borrar vuelo
+                    System.out.println("Que vuelo desas borrar?");
+                    borrar = scan.next();      
+                    //Recorrer vuelos
+                    for(int i = 0;i < vuelos.size();i++){ 
+                        //Coger index introducido despues los codigos que exisiten
+                           //si variable nueva borrar igual a codigo se borra el vuelo
+                    if(vuelos.get(i).getCodigo().equals(borrar)){
+                        //Usar remove index i para que se borre solo ese vuelo
+                        vuelos.remove(i);
+                    }else{
+                        System.out.println("Ese vuelo no se encuentra en la lista");
+                    }
+                }
+                break;
+                }
+                case 4: {
+                    System.out.println("Das la salida?(si/no) ");
+                    siNo = scan.next();
+                    if(siNo.equals("si")){
+                        vuelos.pop();
+                        System.out.println("El primer vuelo despegó");
+                    }else{
+                        System.out.println("No se dio salida a nigún vuelo");
+                    }
+                break;
+                }
+                case 5: {
+                    for(int i = 0;i < vuelos.size();i++){
+                        vuelos.get(i).getSalida().isBefore(LocalDateTime.now());
+                        vuelos.remove(i);
+                    }
+                break;
+                }
+                case 6: {
+                    //Uso de while por si ponen minutos erroneos
+                    while(true){
+                        System.out.println("Cuantos minutos quieres cambiar?: ");
+                        min = scan.nextInt();
+                        System.out.println("Que vuelo deseas modificar?");
+                        borrar = scan.next();
+                        //recorrer array vuelos
+                        for(int i = 0; i < vuelos.size();i++){
+                            //Si el codigo del vuelo igual al introducido por usuario
+                            if(vuelos.get(i).getCodigo().equals(borrar)){
+                                //Sumar minutos
+                                vuelos.get(i).setSalida(vuelos.get(i).getSalida().plusMinutes(min));
+                                vuelos.get(i).setLlegada(vuelos.get(i).getLlegada().plusMinutes(min));
+                            }
+                        }
+                        if(min <= 0){
+                            throw new ValorNoValidoException();
+                        }
+                        
+                        
+                        break;
+                    }
+                }
+                case 7: {
+                    System.out.println("Gracias por usar esta aplicaion :)");
+                    return;
+                }
+            }
+
+    }
+
+
+}
