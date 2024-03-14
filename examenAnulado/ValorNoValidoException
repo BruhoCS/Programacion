@@ -1,0 +1,8 @@
+package examenanulado;
+
+public class ValorNoValidoException extends Exception{
+    
+    public String getMessage() {
+        return "No valido";
+    }
+}
