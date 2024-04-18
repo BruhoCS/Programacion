@@ -34,8 +34,14 @@ public class Main {
 				ordenarDepartamento(null, null);
 			}
 				//Añadir empregado
-			case 3:{
 				
+			case 3:{
+				System.out.println("== NOVO EMPREGADO ==");
+				try(BufferedWriter buf = new BufferedWriter(new FileWriter("empregados.txt"))){
+					
+				}catch(IOException e) {
+					
+				}
 				
 			}
 				//borrar empregado
