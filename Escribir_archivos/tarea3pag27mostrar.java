@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
+
+// Uso de las clases (OrdenAlfabetico,OrdeDepartamento,Empregado)
 public class Main {
 
 	public static void main(String[] args) {
